@@ -7,6 +7,7 @@ namespace Game.Systems.Audio
     {
         [SerializeField] AudioClip[] clips;
         [SerializeField] AudioSource source;
+        [SerializeField] bool playOnEnable = true;
 
         [Header("Settings")]
         [SerializeField, Min(0)] float delay;
@@ -18,6 +19,12 @@ namespace Game.Systems.Audio
         }
 
         private void OnEnable()
+        {
+            if (playOnEnable)
+                PlayRandom();
+        }
+
+        public void PlayRandom()
         {
             source.clip = clips[Random.Range(0, clips.Length)];
 

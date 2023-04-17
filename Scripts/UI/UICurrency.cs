@@ -26,15 +26,15 @@ namespace Game.Core.UI
             currency = currencyData;
 
             icon.sprite = currency.Icon;
-            UpdateText(startValue);
+            UpdateText(startValue, startValue);
 
             if (subscribeToUpdate)
                 currency.OnValueUpdate += UpdateText;
         }
 
-        void UpdateText(float value)
+        void UpdateText(float newValue, float old)
         {
-            valueText.text = value.ToString();
+            valueText.text = newValue.ToString();
         }
     }
 }

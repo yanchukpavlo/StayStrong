@@ -54,7 +54,10 @@ namespace Game.Systems.Building
             DataManager.Wallet.CurrencyAdd(currency, amount);
 
             if ((resourceRemained -= amount) == 0)
+            {
+                eventDestroyStructure.Invoke(this, this);
                 Destroy(gameObject);
+            }
         }
 
         [System.Serializable]

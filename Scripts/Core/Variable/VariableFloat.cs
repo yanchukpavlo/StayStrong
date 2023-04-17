@@ -20,6 +20,8 @@ namespace Game.Core
 
         public override void UpdateValue(float newValue)
         {
+            newValue = (float)Math.Round((double)newValue, 3);
+
             if (Range != Vector2Int.zero)
             {
                 if (newValue <= Range.x)

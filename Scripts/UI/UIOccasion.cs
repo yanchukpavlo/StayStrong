@@ -8,35 +8,21 @@ namespace Game.Core.UI
 {
     public class UIOccasion : MonoBehaviour
     {
-        [SerializeField] GameObject visualRoot;
         [SerializeField] Transform conditionRoot;
         [SerializeField] Image icon;
         [SerializeField] TextMeshProUGUI textName;
         [SerializeField] TextMeshProUGUI textDescription;
         [SerializeField] Slider timerSlider;
 
-        [Header("Events")]
-        [SerializeField] GameEvent eventNewOccasion;
-
         Occasion currentOccasion;
 
-        private void OnEnable()
+        public void OnNewOccasion(Component sender, object data)
         {
-            eventNewOccasion.RegisterListener(OnNewOccasion);
-        }
-
-        private void OnDisable()
-        {
-            eventNewOccasion.UnregisterListener(OnNewOccasion);
+            Setup((Occasion)data);
         }
 
         public void ButtonAccept() => currentOccasion.Accept();
         public void ButtonDeny() => currentOccasion.Deny();
-
-        void OnNewOccasion(Component sender, object data)
-        {
-            Setup((Occasion)data);
-        }
 
         void Setup(Occasion occasion)
         {
@@ -50,11 +36,11 @@ namespace Game.Core.UI
 
             occasion.GetCondition(conditionRoot);
 
-            visualRoot.SetActive(true);
-
             occasion.OnDone += Close;
             occasion.OnFail += Close;
             occasion.OnTimerUpdate += UpdateTimer;
+
+            gameObject.SetActive(true);
         }
 
         void Close()
@@ -65,7 +51,7 @@ namespace Game.Core.UI
 
             currentOccasion = null;
 
-            visualRoot.SetActive(false);
+            gameObject.SetActive(false);
             conditionRoot.DeleteChildren();
         }
 

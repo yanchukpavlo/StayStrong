@@ -40,8 +40,6 @@ namespace Game.Core
 
         public void ResetVariables()
         {
-            Wallet.Setup();
-
             foreach (var item in floatVariables)
             {
                 item.Setup();

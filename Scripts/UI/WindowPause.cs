@@ -24,26 +24,26 @@ namespace Game.Core.UI.Windows
 
         public void ExitToMenu()
         {
+            canvasGroup.interactable = false;
             Save();
 
             StartCoroutine(Helper.WaitAdnDo(1f, () =>
                 {
                     canvasGroup.interactable = true;
                     HUD_Manager.Instance.GoToMenu();
-                    Debug.Log("ExitToMenu");
                 }
             ));
         }
 
         public void Exit()
         {
+            canvasGroup.interactable = false;
             Save();
 
             StartCoroutine(Helper.WaitAdnDo(1f, () =>
                 {
                     canvasGroup.interactable = true;
                     HUD_Manager.Instance.Exit();
-                    Debug.Log("Exit");
                 }
             ));
         }
@@ -51,7 +51,6 @@ namespace Game.Core.UI.Windows
         public void Save()
         {
             Systems.Save.SaveLoadSystem.Instance.Save();
-            Debug.Log("Save");
         }
     }
 }

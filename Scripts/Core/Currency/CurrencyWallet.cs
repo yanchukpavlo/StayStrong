@@ -9,12 +9,6 @@ namespace Game.Core
     {
         [field: SerializeField] public List<CurrencyData> CurrencyInWallet { get; private set; }
 
-        public void Setup()
-        {
-            foreach (var item in CurrencyInWallet)
-                item.Setup();
-        }
-
         public bool IsEnaughtCurrency(SerializedDictionary<CurrencyData, float> priceDictionary)
         {
             bool result = true;
@@ -32,7 +26,7 @@ namespace Game.Core
         public void CurrencyAdd(CurrencyData currency, float amount)
         {
             if (CurrencyInWallet.Contains(currency))
-                currency.CurrencyAdd(amount);
+                currency.AddingValue(amount);
             else
                 Debug.Log($"Currency {currency.Name} does not exist in wallet {name}.");
         }
@@ -46,7 +40,7 @@ namespace Game.Core
         public void CurrencySubtraction(CurrencyData currency, float amount)
         {
             if (CurrencyInWallet.Contains(currency))
-                currency.CurrencyAdd(-amount);
+                currency.AddingValue(-amount);
             else
                 Debug.Log($"Currency {currency.Name} does not exist in wallet {name}.");
         }
